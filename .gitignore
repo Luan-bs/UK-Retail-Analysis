@@ -1,0 +1,18 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+.venv/
+venv/
+env/
+
+# ── Airflow data ─────────────────────────────────────────────────────────
+dags_airflow/data/bronze/
+dags_airflow/data/silver/   
+dags_airflow/data/gold/
+
+# ── Jupyter Notebooks ─────────────────────────────────────────────────────
+src/scripts/bronze/
+src/scripts/silver/
+src/scripts/gold/
