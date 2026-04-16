@@ -13,6 +13,6 @@ dags_airflow/data/silver/
 dags_airflow/data/gold/
 
 # ── Jupyter Notebooks ─────────────────────────────────────────────────────
-src/scripts/bronze/
-src/scripts/silver/
-src/scripts/gold/
+src/scripts/data/bronze
+src/scripts/data/gold
+src/scripts/data/silver
