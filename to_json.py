@@ -3,7 +3,7 @@ import os
 
 # Pasta com os arquivos Parquet
 pasta_entrada = "src\\scripts\\data\\gold"
-pasta_saida = "dashboard\\data"
+pasta_saida = "src\\scripts\\data\\json"
 
 # Cria a pasta de saída se não existir
 os.makedirs(pasta_saida, exist_ok=True)

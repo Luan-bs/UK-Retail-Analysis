@@ -4,7 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-# ── Page config ──────────────────────────────────────────────────────────────
+# Page config 
 st.set_page_config(
     page_title="Retail Analytics",
     page_icon="🛒",
@@ -12,7 +12,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Custom CSS ────────────────────────────────────────────────────────────────
+# Custom CSS 
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -105,18 +105,18 @@ footer { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
 
-# ── Load data ─────────────────────────────────────────────────────────────────
+# Load data 
 @st.cache_data
 def load_data():
-    base = "src\\scripts\\data\\gold\\"
-    fact       = pd.read_parquet(base + "fact_all.parquet")
-    dim_date   = pd.read_parquet(base + "dim_date.parquet")
-    dim_country= pd.read_parquet(base + "dim_country.parquet")
-    dim_product= pd.read_parquet(base + "dim_product.parquet")
-    dim_customer=pd.read_parquet(base + "dim_customer.parquet")
-    metrics    = pd.read_parquet(base + "metrics.parquet")
-    products   = pd.read_parquet(base + "most_purchased_products.parquet")
-    rfm        = pd.read_parquet(base + "rfm.parquet")
+    base = "src\\scripts\\data\\json\\"
+    fact       = pd.read_json(base + "fact_all.json", orient="records")
+    dim_date   = pd.read_json(base + "dim_date.json", orient="records")
+    dim_country= pd.read_json(base + "dim_country.json", orient="records")
+    dim_product= pd.read_json(base + "dim_product.json", orient="records")
+    dim_customer=pd.read_json(base + "dim_customer.json", orient="records")
+    metrics    = pd.read_json(base + "metrics.json", orient="records")
+    products   = pd.read_json(base + "most_purchased_products.json", orient="records")
+    rfm        = pd.read_json(base + "rfm.json", orient="records")
 
     # Enrich fact
     fact = fact.merge(dim_date, on="DateID", how="left")
@@ -127,7 +127,7 @@ def load_data():
 
 fact, dim_date, dim_country, dim_product, dim_customer, metrics, products, rfm = load_data()
 
-# ── Plotly dark theme ─────────────────────────────────────────────────────────
+# Plotly dark theme 
 PLOTLY_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
@@ -140,7 +140,7 @@ PLOTLY_LAYOUT = dict(
 
 COLORS = ["#7c6af7","#f7c26a","#6af7c2","#f76a8a","#6aabf7","#c26af7","#f7a06a","#a0f76a"]
 
-# ── Sidebar ───────────────────────────────────────────────────────────────────
+# Sidebar 
 with st.sidebar:
     st.markdown("## 🛒 UK Retail")
     st.markdown("---")
@@ -154,7 +154,7 @@ with st.sidebar:
     st.markdown("---")
     st.markdown(f"<small style='color:#7a7a9a'>**{len(fact):,}** transações carregadas</small>", unsafe_allow_html=True)
 
-# ── Filter ────────────────────────────────────────────────────────────────────
+# Filter
 filtered = fact.copy()
 if selected_year != "Todos":
     filtered = filtered[filtered["Year"] == int(selected_year)]
@@ -163,16 +163,16 @@ if selected_country != "Todos":
 
 sales = filtered[filtered["TransactionType"] == "Sale"]
 
-# ── Header ────────────────────────────────────────────────────────────────────
+# Header
 st.markdown("<h1 style='margin-bottom:4px'>UK Retail Analytics</h1>", unsafe_allow_html=True)
 st.markdown("<p style='color:#7a7a9a;font-size:13px;margin-top:0'>E-commerce Performance & Customer Insights</p>", unsafe_allow_html=True)
 
-# ── Tabs ──────────────────────────────────────────────────────────────────────
+# Tabs 
 tab1, tab2, tab3, tab4 = st.tabs(["OVERVIEW", "CLIENTES", "PRODUTOS", "TRANSAÇÕES"])
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # TAB 1 – OVERVIEW
-# ══════════════════════════════════════════════════════════════════════════════
+
 with tab1:
     # KPIs — calculados dinamicamente a partir dos filtros
     gross_sales   = filtered["total_value"].clip(lower=0).sum()
@@ -248,9 +248,8 @@ with tab1:
     fig3.update_xaxes(tickprefix="£", tickformat=".2s")
     st.plotly_chart(fig3, use_container_width=True)
 
-# ══════════════════════════════════════════════════════════════════════════════
 # TAB 2 – CLIENTES (RFM)
-# ══════════════════════════════════════════════════════════════════════════════
+
 with tab2:
     st.markdown("### Análise RFM de Clientes")
     st.markdown("<p style='color:#7a7a9a;font-size:13px'>Recency · Frequency · Monetary — segmentação da base de clientes</p>", unsafe_allow_html=True)
@@ -296,9 +295,8 @@ with tab2:
         top_cust["Monetary"] = top_cust["Monetary"].apply(lambda x: f"£{x:,.0f}")
         st.dataframe(top_cust, use_container_width=True, hide_index=True)
 
-# ══════════════════════════════════════════════════════════════════════════════
 # TAB 3 – PRODUTOS
-# ══════════════════════════════════════════════════════════════════════════════
+
 with tab3:
     st.markdown("### Análise de Produtos")
 
@@ -350,9 +348,8 @@ with tab3:
     fig8.update_layout(**PLOTLY_LAYOUT, height=320, coloraxis_showscale=False)
     st.plotly_chart(fig8, use_container_width=True)
 
-# ══════════════════════════════════════════════════════════════════════════════
 # TAB 4 – TRANSAÇÕES
-# ══════════════════════════════════════════════════════════════════════════════
+
 with tab4:
     st.markdown("### Análise de Transações")
 
