@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from pathlib import Path
 
 # Page config 
 st.set_page_config(
@@ -108,7 +109,7 @@ footer { visibility: hidden; }
 # Load data 
 @st.cache_data
 def load_data():
-    base = "src\\scripts\\data\\json\\"
+    base = "src/scripts/data/json/"
     fact       = pd.read_json(base + "fact_all.json", orient="records")
     dim_date   = pd.read_json(base + "dim_date.json", orient="records")
     dim_country= pd.read_json(base + "dim_country.json", orient="records")
