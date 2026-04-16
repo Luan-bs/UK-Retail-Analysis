@@ -16,3 +16,5 @@ dags_airflow/data/gold/
 src/scripts/data/bronze
 src/scripts/data/gold
 src/scripts/data/silver
+
+.devcontainer/
