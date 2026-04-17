@@ -109,15 +109,15 @@ footer { visibility: hidden; }
 # Load data 
 @st.cache_data
 def load_data():
-    base = "src/scripts/data/json/"
-    fact       = pd.read_json(base + "fact_all.json", orient="records")
-    dim_date   = pd.read_json(base + "dim_date.json", orient="records")
-    dim_country= pd.read_json(base + "dim_country.json", orient="records")
-    dim_product= pd.read_json(base + "dim_product.json", orient="records")
-    dim_customer=pd.read_json(base + "dim_customer.json", orient="records")
-    metrics    = pd.read_json(base + "metrics.json", orient="records")
-    products   = pd.read_json(base + "most_purchased_products.json", orient="records")
-    rfm        = pd.read_json(base + "rfm.json", orient="records")
+    base = Path(__file__).parent / "src" / "scripts" / "data" / "json"
+    fact       = pd.read_json(base / "fact_all.json", orient="records")
+    dim_date   = pd.read_json(base / "dim_date.json", orient="records")
+    dim_country= pd.read_json(base / "dim_country.json", orient="records")
+    dim_product= pd.read_json(base / "dim_product.json", orient="records")
+    dim_customer=pd.read_json(base / "dim_customer.json", orient="records")
+    metrics    = pd.read_json(base / "metrics.json", orient="records")
+    products   = pd.read_json(base / "most_purchased_products.json", orient="records")
+    rfm        = pd.read_json(base / "rfm.json", orient="records")
 
     # Enrich fact
     fact = fact.merge(dim_date, on="DateID", how="left")
