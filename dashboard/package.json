@@ -1,0 +1,15 @@
+{
+  "name": "uk-retail-dashboard",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "prepare:data": "node scripts/copy-data.mjs",
+    "dev": "npm run prepare:data && vite",
+    "build": "npm run prepare:data && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.1.0"
+  }
+}
