@@ -1,3 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-*.json filter=lfs diff=lfs merge=lfs -text
+src/scripts/data/**/*.json filter=lfs diff=lfs merge=lfs -text
+src/scripts/data/**/*.parquet filter=lfs diff=lfs merge=lfs -text
+
