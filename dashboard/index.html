@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="UK Retail Analytics dashboard" />
+    <title>UK Retail Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="loading" class="loading">Carregando dados...</div>
+    <div id="app" class="app" hidden>
+      <aside class="sidebar">
+        <div class="brand"><span class="brand-mark">▣</span><span>UK RETAIL</span></div>
+        <div class="divider"></div>
+        <label for="year-filter">Ano</label>
+        <select id="year-filter"></select>
+        <label for="country-filter">País</label>
+        <select id="country-filter"></select>
+        <div class="divider"></div>
+        <p class="data-status"><strong id="transaction-count">0</strong> transações carregadas</p>
+      </aside>
+      <main class="dashboard">
+        <header class="header"><h1>UK Retail Analytics</h1><p>E-commerce Performance &amp; Customer Insights</p></header>
+        <nav class="tabs" aria-label="Seções do dashboard">
+          <button class="tab active" data-tab="overview">OVERVIEW</button>
+          <button class="tab" data-tab="customers">CLIENTES</button>
+          <button class="tab" data-tab="products">PRODUTOS</button>
+          <button class="tab" data-tab="transactions">TRANSAÇÕES</button>
+        </nav>
+        <section id="overview" class="tab-panel"></section>
+        <section id="customers" class="tab-panel" hidden></section>
+        <section id="products" class="tab-panel" hidden></section>
+        <section id="transactions" class="tab-panel" hidden></section>
+      </main>
+    </div>
+    <div id="error" class="error" hidden></div>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
