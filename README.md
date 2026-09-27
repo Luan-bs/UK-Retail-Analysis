@@ -13,9 +13,21 @@ Pipeline ETL completo + dashboard interativo para análise de dados de e-commerc
 O dashboard tem 4 abas principais:
 
 - **Overview:** KPIs, vendas mensais, tipos de transação, top países
+  
+![Dashboard](img/Overview.jpg)
+
 - **Clientes:** Análise RFM, segmentação, top clientes por valor
+
+![Dashboard](img/RFM.jpg)
+
 - **Produtos:** Produtos mais vendidos e performance
+
+![Dashboard](img/Produtos.jpg)
+
+
 - **Transações:** Histórico completo com filtros
+
+![Dashboard](img/Transacoes.jpg)
 
 ---
 
